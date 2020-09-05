@@ -5,13 +5,27 @@ export class WPM extends React.Component{
         super(props);
 
     }
-    render() {
-        let num = Math.round((((this.props.inputIndex - this.props.incorrect) / 5 ) /  (this.props.secondsPassed / 60)));
-        if (isNaN(num) || num === Infinity)
-            return <div>WPM: 0</div>;
 
+    render() {
+       let totalInput = this.props.userInput.length;
+       let incorrectInputs = this.props.incorrect;
+       let secondsPassed = this.props.secondsPassed;
+       let wordsPerMin = Math.round(((totalInput/5) - incorrectInputs) / (secondsPassed / 60));
+       if (wordsPerMin === Infinity || isNaN(wordsPerMin) || wordsPerMin < 0){
+           return (
+               <div>
+                   WPM: 0
+                   <br/>
+                   accuracy:{Math.round(((totalInput-incorrectInputs) / totalInput)*100)} %
+               </div>
+           )
+       }
     return (
-        <div>WPM:{num}</div>
+        <div>
+            WPM: {wordsPerMin}
+            <br/>
+            accuracy:{Math.round(((totalInput-incorrectInputs) / totalInput)*100)} %
+        </div>
     )
     }
 }
