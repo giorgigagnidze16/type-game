@@ -10,9 +10,7 @@ class App extends React.Component{
      super(props);
      this.state={
          userInput:[],
-         wmp:0,
          incorrect:0,
-         accuracy:0,
          secondsPassed:0,
          startTime:false,
          endTime:false,
